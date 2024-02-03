@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employer{% endblock %}
+
+{% block body %}
+    <h1>Employer</h1>
+    <a href="{{ path('app_register') }}">Ajouter</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            {% if user.roles[0] != "ROLE_ADMIN" %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles[0] }}</td>
+                <td>{{ include('registration/_delete_form.html.twig') }}</td>
+            </tr>
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

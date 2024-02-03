@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Serve index{% endblock %}
+
+{% block body %}
+    <h1>Services</h1>
+    <a href="{{ path('app_register') }}">Ajouter</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ServeName</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for serve in serves %}
+            <tr>
+                <td>{{ serve.serveName }}</td>
+                <td>{{ serve.description }}</td>
+                <td>
+                    {{ include('serve/_delete_form.html.twig') }}
+                    <a href="{{ path('app_serve_edit', {'id': serve.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

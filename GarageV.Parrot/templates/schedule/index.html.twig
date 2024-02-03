@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Schedule index{% endblock %}
+
+{% block body %}
+    <h1>Schedule index</h1>
+    <a href="{{ path('app_schedule_new') }}">Create new</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>OpenAM</th>
+                <th>CloseAM</th>
+                <th>OpenPM</th>
+                <th>ClosePM</th>
+                <th>Active</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for schedule in schedules %}
+            <tr>
+                <td>{{ schedule.day }}</td>
+                <td>{{ schedule.openAM ? schedule.openAM|date('H:i') : '' }}</td>
+                <td>{{ schedule.closeAM ? schedule.closeAM|date('H:i') : '' }}</td>
+                <td>{{ schedule.openPM ? schedule.openPM|date('H:i') : '' }}</td>
+                <td>{{ schedule.closePM ? schedule.closePM|date('H:i') : '' }}</td>
+                <td>{{ schedule.Active ? 'Yes' : 'No' }}</td>
+                <td>
+                    {{ include('schedule/_delete_form.html.twig') }}
+                    <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

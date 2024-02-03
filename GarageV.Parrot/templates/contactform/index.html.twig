@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormulaireDeContacte{% endblock %}
+
+{% block body %}
+    <h1>Formulaire de contacte</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Subject</th>
+                <th>Name</th>
+                <th>Firstname</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Missive</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contactform in contactforms %}
+            <tr>
+                <td>{{ contactform.id }}</td>
+                <td>{{ contactform.subject }}</td>
+                <td>{{ contactform.name }}</td>
+                <td>{{ contactform.firstname }}</td>
+                <td>{{ contactform.email }}</td>
+                <td>{{ contactform.phone }}</td>
+                <td>{{ contactform.missive }}</td>
+                <td>
+                    <a href="{{ path('app_contactform_show', {'id': contactform.id}) }}">show</a>
+                    {{ include('contactform/_delete_form.html.twig') }}
+                    {#<a href="{{ path('app_contactform_edit', {'id': contactform.id}) }}">edit</a>#}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

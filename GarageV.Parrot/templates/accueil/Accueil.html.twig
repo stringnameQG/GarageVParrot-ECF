@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<meta charset="UTF-8">
+    	<title>{% block title %}Welcome!{% endblock %}</title>
+    	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    	{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    	{% block stylesheets %}
+        	{{ encore_entry_link_tags('app') }}
+    	{% endblock %}
+
+    	{% block javascripts %}
+        	{{ encore_entry_script_tags('app') }}
+    	{% endblock %}
+	</head>
+	<body>
+    	{% block body %}
+        	<h1>Bienvenue sur la page {{ nomPage }}</h1>
+
+			<a href="{{ path('app_contactform_index') }}">FormulaireDeContacte</a>
+			<br>
+			<a href="{{ path('app_view_index') }}">Avis</a>
+			<br>
+			<a href="{{ path('app_cgv') }}">CGV</a>
+			<br>
+			<a href="{{ path('app_mentionslegale') }}">Mentions Légale</a>
+			<br>
+			<a href="{{ path('app_service') }}">Service</a>
+			<br>
+			<a href="{{ path('app_register') }}">Register</a>
+			<br>
+			<a href="{{ path('app_login') }}">Login</a>
+			<br>
+			{% block nav %}
+				<ul>
+					<li><a href="{{ path('app_accueil') }}">Accueil</a></li>
+					<li><a href="{{ path('app_serve_index') }}">Service</a></li>
+					{#
+					<li><a href="{{ path('app_car_index') }}">Voiture</a></li>
+					#}
+					{% if is_granted('ROLE_ADMIN') %} 
+						<li><a href="{{ path('app_admingestion') }}">AdminGestion</a></li>
+					{% elseif is_granted('ROLE_USER') %}
+						<li><a href="{{ path('app_employergestion') }}">EmployerGestion</a></li>
+					{% endif %} 
+				</ul>
+			{% endblock %}
+    	{% endblock %}
+	</body>
+</html>
