@@ -4,13 +4,31 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="{{ asset('css/modele/header.css') }}">
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </head>
     <body>
-        {% block header %}{% endblock %}
+        <header>
+            <img class="logo" src="{{ asset('asset/dossier-Image/header/Logo.png') }}">
+            <img class="nav-icon" src="{{ asset('asset/dossier-Image/header/nav.svg') }}">
+            <nav class="nav-list">
+                <img class="nav-list__close-icon" src="">
+                <a class="nav-list__item" href="{{ path('app_accueil') }}">Accueil</a>
+                <a class="nav-list__item" href="{{ path('app_car_index') }}">Voiture</a>
+                <a class="nav-list__item" href="{{ path('app_service') }}">Service</a>
+                <a href="{{ path('app_mentionslegale') }}">Mentions Légale</a>
+                <a class="nav-list__item" href="{{ path('app_cgv') }}">CGV</a>
+            {% if is_granted('ROLE_ADMIN') %} 
+                <a class="nav-list__item" href="{{ path('app_admingestion') }}">Admin Gestion</a>
+            {% elseif is_granted('ROLE_USER') %}
+                <a class="nav-list__item" href="{{ path('app_employergestion') }}">Employer Gestion</a>
+            {% else %}
+                <a class="nav-list__item" href="{{ path('app_register') }}">Register</a>
+            {% endif %} 
+            </nav>
+        </header>
         {% block body %}{% endblock %}
-        {% block nav %}{% endblock %}
         {% block footer %}{% endblock %}
     </body>
 </html>
