@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Schedule index</h1>
-    <a href="{{ path('app_schedule_new') }}">Create new</a>
+    {# <a href="{{ path('app_schedule_new') }}">Create new</a> #}
     <table class="table">
         <thead>
             <tr>
@@ -27,7 +27,8 @@
                 <td>{{ schedule.closePM ? schedule.closePM|date('H:i') : '' }}</td>
                 <td>{{ schedule.Active ? 'Yes' : 'No' }}</td>
                 <td>
-                    {{ include('schedule/_delete_form.html.twig') }}
+
+                    {# {{ include('schedule/_delete_form.html.twig') }} #}
                     <a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}">edit</a>
                 </td>
             </tr>

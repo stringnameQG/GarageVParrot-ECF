@@ -1,50 +1,44 @@
-<!DOCTYPE html>
-<html>
-	<head>
-    	<meta charset="UTF-8">
-    	<title>{% block title %}Welcome!{% endblock %}</title>
-    	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-    	{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-    	{% block stylesheets %}
-        	{{ encore_entry_link_tags('app') }}
-    	{% endblock %}
+{% extends 'base-2.html.twig' %}
 
-    	{% block javascripts %}
-        	{{ encore_entry_script_tags('app') }}
-    	{% endblock %}
-	</head>
-	<body>
-    	{% block body %}
-        	<h1>Bienvenue sur la page {{ nomPage }}</h1>
+{% block title %}Accueil{% endblock %}
 
-			<a href="{{ path('app_contactform_index') }}">FormulaireDeContacte</a>
-			<br>
-			<a href="{{ path('app_view_index') }}">Avis</a>
-			<br>
-			<a href="{{ path('app_cgv') }}">CGV</a>
-			<br>
-			<a href="{{ path('app_mentionslegale') }}">Mentions Légale</a>
-			<br>
-			<a href="{{ path('app_service') }}">Service</a>
-			<br>
-			<a href="{{ path('app_register') }}">Register</a>
-			<br>
-			<a href="{{ path('app_login') }}">Login</a>
-			<br>
-			{% block nav %}
-				<ul>
-					<li><a href="{{ path('app_accueil') }}">Accueil</a></li>
-					<li><a href="{{ path('app_serve_index') }}">Service</a></li>
-					{#
-					<li><a href="{{ path('app_car_index') }}">Voiture</a></li>
-					#}
-					{% if is_granted('ROLE_ADMIN') %} 
-						<li><a href="{{ path('app_admingestion') }}">AdminGestion</a></li>
-					{% elseif is_granted('ROLE_USER') %}
-						<li><a href="{{ path('app_employergestion') }}">EmployerGestion</a></li>
-					{% endif %} 
-				</ul>
-			{% endblock %}
-    	{% endblock %}
-	</body>
-</html>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/accueil/accueil.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+{% block main %}
+	{% if serves is not null %}
+	<div class="services">
+		<h2 class="services__title">Nos services proposés</h2>
+		{% for serve in serves %}
+			<p class="services__service-name">. {{ serve.serveName }}</p>
+		{% endfor %}
+		<hr>
+	</div>
+	{% endif %}
+	<div class="vehicules">
+		<h2 class="vehicules__title">Nos véhicules</h2>
+		<p class="vehicules__text">Notre garage à pour spécialités la réparation et remise en état de véhicule d’occasion</p>
+		<hr>
+	</div>
+	<div class="avis">
+		<h2 class="avis__title">Avis clients</h2>
+		{% for view in views %}
+			{% if view.active == 1 %}
+				<div class="avis__commentaire-affichage">
+					<p class="services__service-name">{{ view.firstName }} {{ view.name }}</p>
+					<p class="services__service-score">{{ view.score }}/5</p>
+					<span class="services__service-comment">{{ view.comment }}</span>
+				</div>
+			{% endif %}
+		{% endfor %}
+		<div class="avis__commentaire-btn">
+			<button class="avis__commentaire-btn__item">Plus de commentaires</button>
+			<button class="avis__commentaire-btn__item">Ajouter votre commentaire</button>
+		</div>
+	</div>
+{% endblock %}

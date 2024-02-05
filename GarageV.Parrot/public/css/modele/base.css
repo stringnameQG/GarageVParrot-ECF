@@ -1,0 +1,162 @@
+@font-face { 
+    font-family: LiberationSans-Regular; 
+    src: url('../../Police/LiberationSans-Regular.ttf');
+}
+@font-face { 
+    font-family: GoboldRegular; 
+    src: url('../../Police/GoboldRegular.otf');
+}
+@font-face { 
+    font-family: ModernSans-Light; 
+    src: url('../../Police/ModernSans-Light.otf');
+}
+body {
+    margin: 0px;
+    font-family: LiberationSans-Regular;
+    font-weight: 400;
+    font-size: 16px;
+    grid-template-areas: 
+                "header"
+                "main"
+                "footer";
+    grid-template-rows: 60px 1fr 320px;
+}
+header {
+    grid-area: header;
+    background-color: #DDDDDD;
+    padding-left: 10px; padding-right: 10px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    width: 150px;
+    height: 50px;
+}
+.nav-icon {
+    width: 30px;
+    height: 30px;
+}
+.nav-list {
+    background-color: #ffffff;
+    padding: 10px;
+    width: 140px;
+    height: fit-content;
+    font-family: ModernSans-Light;
+    display: none;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    position: absolute;
+    top: 0px; right: 0px;
+    border: 1px solid #000000;
+    border-radius: 0px 0px 0px 7px;
+    box-shadow: -5px 5px 10px #4141413c;
+    z-index: 1;
+}
+.nav-list__close-icon {
+    width: 30px;
+    height: 30px;
+    align-self: end;
+}
+.nav-list__item {
+    margin-top: 8px; margin-bottom: 8px;
+    color: #000000;
+    text-decoration: none;
+}
+main {
+    grid-area: main;
+    background-color: #ffffff;
+    min-height: calc(100vh - (60px + 320px));
+    height: fit-content;
+}
+footer {
+    grid-area: footer;
+    background-color: #DDDDDD;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.nous-joindre, .nos-horaires, .nos-medias {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    font-family: ModernSans-Light;
+}
+h3 {
+    margin: 0px;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    font-family: GoboldRegular;
+}
+.horaire-ouverture__jour {
+    margin: 1px;
+}
+.icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 40px;
+}
+.icon__style {
+    width: 28px;
+    height: 28px;
+}
+
+@media screen and (min-width: 1000px) {
+    body {
+        font-size: 20px;
+        grid-template-rows: 80px 1fr 180px;
+    }
+    header {
+        padding-left: 20px; padding-right: 20px;
+        height: 80px;
+    }
+    .logo {
+        width: 200px;
+        height: 66px;
+    }
+    .nav-icon {
+        display: none;
+    }
+    .nav-list {
+        background-color: #ffffff00;
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        gap: 10px;
+        position: relative;
+        border: unset;
+        border-radius: 0px 0px 0px 0px;
+        box-shadow: none;
+        font-size: 16px;
+    }
+    .nav-list__close-icon {
+        display: none;
+    }
+    .nav-list__item {
+    }
+    main {
+        grid-area: main;
+        min-height: calc(100vh - (80px + 180px));
+    }
+    footer {
+        grid-area: footer;
+        height: 180px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .horaire-ouverture__jour {
+        margin: 0px;
+        margin-bottom: 1px;
+        font-size: 16px;
+    }
+}

@@ -1,6 +1,17 @@
+@font-face { 
+    font-family: LiberationSans-Regular; 
+    src: url('../../Police/LiberationSans-Regular.ttf');
+}
+body {
+    margin: 0px;
+    font-family: LiberationSans-Regular;
+    font-weight: 400;
+    font-size: 16px;
+}
 header {
-    background-color: #D8D8D8;
+    background-color: #8b83ff;
     padding-left: 10px; padding-right: 10px;
+    height: 60px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -15,6 +26,8 @@ header {
     height: 30px;
 }
 .nav-list {
+    width: 140px;
+    height: 250px;
     display: none;
 }
 .nav-list__close-icon {
@@ -22,16 +35,18 @@ header {
     height: 30px;
 }
 .nav-list__item {
-    width: 140px;
-    height: 250px;
     color: #000000;
     text-decoration: none;
 }
 
 
 @media screen and (min-width: 1000px) {
+    body {
+        font-size: 20px;
+    }
     header {
         padding-left: 20px; padding-right: 20px;
+        height: 80px;
     }
     .logo {
         width: 200px;
@@ -41,10 +56,12 @@ header {
         display: none;
     }
     .nav-list {
+        width: fit-content;
+        height: fit-content;
         display: flex;
         flex-direction: row;
         justify-content: start;
-        gap: 6px;
+        gap: 10px;
         font-size: 16px;
     }
     .nav-list__close-icon {
