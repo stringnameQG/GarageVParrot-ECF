@@ -1,4 +1,4 @@
-{% extends 'base-2.html.twig' %}
+{% extends 'modele.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
 
@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="{{ asset('css/accueil/accueil.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/modele/formulaireAvis.css') }}">
 {% endblock %}
-{% block javascripts %}
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script src="{{ asset('js/ajouterAvis.js') }}"></script>
-	<script src="{{ asset('js/chargementAvis.js') }}"></script>
+{% block scripts %}
+	<script src="{{ asset('js/accueil/windowOnload.js') }}"></script>
+	<script src="{{ asset('js/jquery/jquery-3.7.1.min.js') }}"></script>
+	<script src="{{ asset('js/accueil/ajouterAvis.js') }}"></script>
+	<script src="{{ asset('js/accueil/chargementAvis.js') }}"></script>
+	<script src="{{ asset('php/accueil/avisAffichage.php') }}"></script>
 {% endblock %}
 {% block main %}
 	{% if serves is not null %}
@@ -28,17 +30,6 @@
 	</div>
 	<div class="avis">
 		<h2 class="avis__title">Avis clients</h2>
-		{% for view in views %}
-			{% if view.active == 1 %}
-				<div class="avis__commentaire-affichage">
-					<div class="avis__commentaire-affichage__nom-prenom">
-						<p class="avis__commentaire-affichage__nom-prenom__item">{{ view.firstName }} {{ view.name }}</p>
-						<p class="avis__commentaire-affichage__nom-prenom__item">{{ view.score }}/5</p>
-					</div>
-					<span class="avis__commentaire-affichage__commentaire">{{ view.comment }}</span>
-				</div>
-			{% endif %}
-		{% endfor %}
 		<div class="avis__commentaire-btn">
 			<button id="PlusDeCommentaires" class="avis__commentaire-btn__item">Plus de commentaires</button>
 			<button id="AjouterCommentaires" class="avis__commentaire-btn__item">Ajouter votre commentaire</button>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 function requeteAvis(int $infos = 0) {
     $nombreAvis = $infos;
     $pdo = new PDO('mysql:host=localhost;dbname=garagevparrot', 'root', '');
@@ -10,13 +10,17 @@ function requeteAvis(int $infos = 0) {
         LIMIT 3 OFFSET :nombreAvis
         ");
     $statement->bindValue(':nombreAvis', $nombreAvis, PDO::PARAM_INT);
-
     if ($statement->execute()) {
-        $view = $statement->fetch(PDO::FETCH_ASSOC);
+        $view = $statement->fetchAll(PDO::FETCH_ASSOC);
         $view = json_encode($view);
-        return $view;
+        echo $view;
     } else {
-        return "error";
+        echo "error";
     }
 }
+
+if(isset($_POST['limite'])) {
+    $Limite = $_POST['limite'];
+    requeteAvis($Limite);
+} 
 ?>

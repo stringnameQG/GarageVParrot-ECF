@@ -1,0 +1,165 @@
+{% extends 'modele.html.twig' %}
+
+{% block title %}vehicule{% endblock %}
+
+{% block stylesheets %}
+	{# <link rel="stylesheet" href="{{ asset('css/vehicule/vehicule.css') }}"> #}
+    
+{% endblock %}
+{% block scripts %}
+	<script src="{{ asset('js/vehicule/windowOnload.js') }}"></script>
+	<script src="{{ asset('js/jquery/jquery-3.7.1.min.js') }}"></script>
+	<script src="{{ asset('js/vehicule/filtreVehicule.js') }}"></script>
+{% endblock %}
+{% block main %}
+	<form action="" method="post" class="form-example">
+		<div>
+			<p>Prix</p>
+			<div>
+				<label for="prix-minimum">Minimum</label>
+				<input type="number" name="prix-minimum" id="prix-minimum" min="0" max="1000000"/>
+			</div>
+			<div>
+				<label for="prix-maximum">Maximum</label>
+				<input type="number" name="prix-maximum" id="prix-maximum" min="0" max="1000000"/>
+			</div>
+		</div>
+		<div>
+			<p>Killometrage</p>
+			<div>
+				<label for="killometrage-minimum">Minimum</label>
+				<input type="number" name="killometrage-minimum" id="killometrage-minimum" min="0" max="1000000"/>
+			</div>
+			<div>
+				<label for="killometrage-maximum">Maximum</label>
+				<input type="number" name="killometrage-maximum" id="killometrage-maximum" min="0" max="1000000"/>
+			</div>
+		</div>
+		<div>
+			<p>Anne mise en circulation</p>
+			<div>
+				<label for="anneeMiseEnCirculation-minimum">Minimum</label>
+				<input type="number" name="anneeMiseEnCirculation-minimum" id="anneeMiseEnCirculation-minimum" min="1900" max="2200"/>
+			</div>
+			<div>
+				<label for="anneeMiseEnCirculation-maximum">Maximum</label>
+				<input type="number" name="anneeMiseEnCirculation-maximum" id="anneeMiseEnCirculation-maximum" min="1900" max="2200"/>
+			</div>
+		</div>
+		<input id="Rechercher" type="submit" value="Rechercher"/>
+	</form>
+
+
+
+	{#
+	{% if cars is not null %}
+		<div class="services">
+		{% for car in cars %}
+        <div class="car-affichage">
+            {% for image in car.picture %}
+                <img class="picture" id="{{ asset('/cars_picture/' ~ image.name) }}" alt="{{ car.id }}">
+            {% endfor %}
+            <img data-test class="img" id="{{ car.id }}" src="{{ asset('/cars_picture/' ~ car.picture[0].name) }}" alt="Image" decoding="async">
+            <button href="{{ car.id }}" class="prev-button">Prev</button>
+            <button href="{{ car.id }}" class="next-button">Next</button>
+
+            <span class="titre-car">{{ car.name }}</span>
+            <div class="">
+                <p>Prix: {{ car.price }} €</p>
+                <p>Kilométrage: {{ car.killometering }} km</p>
+            </div>
+                <p>mise en circulation: {{ car.circulation }}</p>
+                <h2>informations suplémentaire</h2>
+            <div class="infos-suplementaire">
+                <div class="infos-suplementaire__colonne">
+                    <div class="infos-suplementaire__colonne__style">
+                        <p>Marque</p>
+                        {% if car.brand == null %}
+                            <p class="infos-style">non renseigné</p>
+                        {% else %}
+                            <p class="infos-style">{{ car.brand }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="infos-suplementaire__colonne__style">
+                        <p>Carburant</p>
+                        {% if car.fuel == null %}
+                            <p class="infos-style">non renseigné</p>
+                        {% else %}
+                            <p class="infos-style">{{ car.fuel }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="infos-suplementaire__colonne__style">
+                        <p>Couleur</p>
+                        {% if car.color == null %}
+                            <p class="infos-style">non renseigné</p>
+                        {% else %}
+                            <p class="infos-style">{{ car.color }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="infos-suplementaire__colonne__style">
+                        <p>Puissance fiscale</p>
+                        {% if car.fiscalpower == null %}
+                            <p class="infos-style">non renseigné</p>
+                        {% else %}
+                            <p class="infos-style">{{ car.fiscalpower }} Cv</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="infos-suplementaire__colonne">
+                    <div class="infos-suplementaire__colonne__style">
+                        <p>Modéle</p>
+                        {% if car.model == null %}
+                            <p class="infos-style">non renseigné</p>
+                        {% else %}
+                            <p class="infos-style">{{ car.model }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="infos-suplementaire__colonne__style">
+                        <p>Boite de vitresse</p>
+                        {% if car.gearbox == null %}
+                            <p class="infos-style">non renseigné</p>
+                        {% else %}
+                            <p class="infos-style">{{ car.gearbox }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="infos-suplementaire__colonne__style">
+                        <p>Nombre de porte</p>
+                        {% if car.numberofdoors == null %}
+                            <p class="infos-style">non renseigné</p>
+                        {% else %}
+                            <p class="infos-style">{{ car.numberofdoors }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="infos-suplementaire__colonne__style">
+                        <p>Puissance DIN</p>
+                        {% if car.powerdin == null %}
+                            <p class="infos-style">non renseigné</p>
+                        {% else %}
+                            <p class="infos-style">{{ car.powerdin }} Ch</p>
+                        {% endif %}
+                    </div>    
+                </div>
+            </div>
+            <div class="autres-infos">
+                <h3>Autre infos</h3>
+                {% if car.otherinfo == null %}
+                    <p class="infos-style">non renseigné</p>
+                {% else %}
+                    <p class="infos-style">{{ car.otherinfo }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+            <div>
+                <span>aucune annonce de voiture</span>
+            </div>
+        {% endfor %}
+		</div>
+	{% else %}
+		<h2>Nous n'avons aucun véhicule en ventes actuellement</h2>
+	{% endif %}
+	#}
+{% endblock %}
+{% block body %}
+	
+{% endblock %}
