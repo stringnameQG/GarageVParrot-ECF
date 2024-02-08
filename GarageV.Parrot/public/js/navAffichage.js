@@ -1,5 +1,5 @@
 // On attende le chargement complét de la page 
-window.onload = () => {
+navAffichage = () => {
     // On crée une variable liée a l'élément .nav-icon
     let navIcon = document.querySelector(".nav-icon");
     // On crée une variable liée à l'élément nav

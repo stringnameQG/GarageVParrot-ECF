@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-#[IsGranted('ROLE_USER')]
+
+#[IsGranted('ROLE_USER')] 
 #[Route('/view')]
 class ViewController extends AbstractController
 {
@@ -28,10 +29,10 @@ class ViewController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $view = new View();
-        $form = $this->createForm(ViewType::class, $view);
-        $form->handleRequest($request);
+        $formulaireAvis = $this->createForm(ViewType::class, $view);
+        $formulaireAvis->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formulaireAvis->isSubmitted() && $formulaireAvis->isValid()) {
             $entityManager->persist($view);
             $entityManager->flush();
 
@@ -40,7 +41,7 @@ class ViewController extends AbstractController
 
         return $this->renderForm('view/new.html.twig', [
             'view' => $view,
-            'form' => $form,
+            'formulaireAvis' => $formulaireAvis,
         ]);
     }
 
@@ -55,10 +56,10 @@ class ViewController extends AbstractController
     #[Route('/{id}/edit', name: 'app_view_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, View $view, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(ViewType::class, $view);
-        $form->handleRequest($request);
+        $formulaireAvis = $this->createForm(ViewType::class, $view);
+        $formulaireAvis->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formulaireAvis->isSubmitted() && $formulaireAvis->isValid()) {
             $entityManager->flush();
 
             return $this->redirectToRoute('app_view_index', [], Response::HTTP_SEE_OTHER);
@@ -66,7 +67,7 @@ class ViewController extends AbstractController
 
         return $this->renderForm('view/edit.html.twig', [
             'view' => $view,
-            'form' => $form,
+            'formulaireAvis' => $formulaireAvis,
         ]);
     }
 

@@ -7,7 +7,6 @@ use App\Entity\Picturecar;
 use App\Form\CarType;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use SebastianBergmann\Environment\Console;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +23,7 @@ class CarController extends AbstractController
     public function index(CarRepository $carRepository, int $page): Response
     {   // On défini le nombre de voiture par page dans une variable
         $carPerPage = 9;
-        // On crée ensuite une variable qui contien les paramétre de notre méthode critéria
+        // On crée ensuite une variable qui contien les paramétres de notre méthode critéria
         $criteria = Criteria::create()
             ->setFirstResult(($page - 1) * $carPerPage)  // Défine la premiére voiture affiché
             ->setMaxResults($carPerPage);  // Définie le nombre de voiture affiché

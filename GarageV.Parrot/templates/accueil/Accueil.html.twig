@@ -4,12 +4,13 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/accueil/accueil.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/modele/formulaireAvis.css') }}">
 {% endblock %}
-
 {% block javascripts %}
-	{{ encore_entry_script_tags('app') }}
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="{{ asset('js/ajouterAvis.js') }}"></script>
+	<script src="{{ asset('js/chargementAvis.js') }}"></script>
 {% endblock %}
-
 {% block main %}
 	{% if serves is not null %}
 	<div class="services">
@@ -30,15 +31,20 @@
 		{% for view in views %}
 			{% if view.active == 1 %}
 				<div class="avis__commentaire-affichage">
-					<p class="services__service-name">{{ view.firstName }} {{ view.name }}</p>
-					<p class="services__service-score">{{ view.score }}/5</p>
-					<span class="services__service-comment">{{ view.comment }}</span>
+					<div class="avis__commentaire-affichage__nom-prenom">
+						<p class="avis__commentaire-affichage__nom-prenom__item">{{ view.firstName }} {{ view.name }}</p>
+						<p class="avis__commentaire-affichage__nom-prenom__item">{{ view.score }}/5</p>
+					</div>
+					<span class="avis__commentaire-affichage__commentaire">{{ view.comment }}</span>
 				</div>
 			{% endif %}
 		{% endfor %}
 		<div class="avis__commentaire-btn">
-			<button class="avis__commentaire-btn__item">Plus de commentaires</button>
-			<button class="avis__commentaire-btn__item">Ajouter votre commentaire</button>
+			<button id="PlusDeCommentaires" class="avis__commentaire-btn__item">Plus de commentaires</button>
+			<button id="AjouterCommentaires" class="avis__commentaire-btn__item">Ajouter votre commentaire</button>
 		</div>
 	</div>
+{% endblock %}
+{% block body %}
+	{{ include('view/_form.html.twig') }}
 {% endblock %}

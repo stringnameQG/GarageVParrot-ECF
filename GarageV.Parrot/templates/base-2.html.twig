@@ -8,8 +8,10 @@
         {% block stylesheets %}
         {% endblock %}
         <script src="{{ asset('js/navAffichage.js') }}"></script>
-        {# <script src="{{ asset('js/formulaireAffichage.js') }}"></script> #}
-        {% block javascripts %}{% endblock %}
+        <script src="{{ asset('js/windowOnload.js') }}"></script>
+        {% block javascripts %}
+        
+        {% endblock %}
     </head>
     {# On détecte le changement de largeur de l'écran pour modifier l'affichage de la nav barre #}
     <body onresize="resizeWindowWidth()">
@@ -28,13 +30,15 @@
             {% elseif is_granted('ROLE_USER') %}
                 <a class="nav-list__item" href="{{ path('app_employergestion') }}">Employer Gestion</a>
             {% else %}
-                <a class="nav-list__item" href="{{ path('app_register') }}">Register</a>
+                <a class="nav-list__item" href="{{ path('app_login') }}">Register</a>
             {% endif %} 
             </nav>
         </header>
         <main>
             {% block main %}{% endblock %}
         </main>
+        {% block body %}{% endblock %}
+        {% block aside %}{% endblock %}
         <footer>
             <div class="nous-joindre">
                 <h3>NOUS JOINDRE</h3>
