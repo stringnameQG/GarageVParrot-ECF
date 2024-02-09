@@ -19,8 +19,8 @@ function requeteAvis(int $infos = 0) {
     }
 }
 
-if(isset($_POST['limite'])) {
-    $Limite = $_POST['limite'];
+if(isset($_GET['limite'])) {
+    $Limite = $_GET['limite'];
     requeteAvis($Limite);
 } 
 ?>

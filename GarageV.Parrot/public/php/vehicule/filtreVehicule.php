@@ -47,13 +47,13 @@ function requeteAvis(
 }
 
 
-if(isset($_POST['prixMinimum'])) {
-    $prixMinimum = $_POST['prixMinimum'];
-    $prixMaximum = $_POST['prixMaximum'];
-    $killometrageMinimum = $_POST['killometrageMinimum'];
-    $killometrageMaximum = $_POST['killometrageMaximum'];
-    $anneeMiseEnciculationMinimum = $_POST['anneeMiseEnciculationMinimum'];
-    $anneeMiseEnciculationMaximum = $_POST['anneeMiseEnciculationMaximum'];
+if(isset($_GET['prixMinimum'])) {
+    $prixMinimum = $_GET['prixMinimum'];
+    $prixMaximum = $_GET['prixMaximum'];
+    $killometrageMinimum = $_GET['killometrageMinimum'];
+    $killometrageMaximum = $_GET['killometrageMaximum'];
+    $anneeMiseEnciculationMinimum = $_GET['anneeMiseEnciculationMinimum'];
+    $anneeMiseEnciculationMaximum = $_GET['anneeMiseEnciculationMaximum'];
     requeteAvis(
         $prixMinimum,
         $prixMaximum,
@@ -62,9 +62,9 @@ if(isset($_POST['prixMinimum'])) {
         $anneeMiseEnciculationMinimum,
         $anneeMiseEnciculationMaximum
     );
-} 
-
-
+} else {
+    echo "Vide";
+}
 
 
 

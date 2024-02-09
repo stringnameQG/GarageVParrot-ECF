@@ -26,17 +26,18 @@ function avisStyle(pesonne) {
         
         let spanComment = document.createElement("span");
         spanComment.className = avisSpan;
-        spanComment.innerText = element["comment"];
+        spanComment.textContent = element["comment"];
         divAvis.append(spanComment);
     });
 }
+
 
 var infos = 0;
 function appelSciptPhp() {
     let form = {"limite" : infos};
     $.ajax({
         url: 'php/accueil/avisAffichage.php',
-        method: "POST",
+        method: "GET",
         data: form,
         dataType: "json",
         timeout: 1000,

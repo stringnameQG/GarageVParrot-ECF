@@ -9,10 +9,23 @@ h1 {
     margin: 2px;
     font-size: 20px;
 }
-.titre-car {
+.affichage-vehicule {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.vehicule {
+    padding: 6px;
+    max-width: 400px;
+    width: 100%;
+    align-self: center;
+    border-radius: 15px;
+    box-shadow: 4px 4px 10px #656565;
+}
+.vehicule-titre {
     padding: 4px;
 }
-.car-affichage {
+.vehicule-affichage {
     background-color: #F2EEEE;
     padding: 4px;
     max-width: 500px;
@@ -45,35 +58,6 @@ h2 {
 .infos-style {
     color: #666666;
 }
-.btn-modifier, .btn-supprimer {
-    color: #000000;
-    padding: 3px;
-    width: fit-content;
-    align-self: center;
-    text-decoration: none;
-    border-radius: 5px;
-    border: 0px;
-    font-family: LiberationSans-Regular;
-    border: 1px solid #808080;
-}
-.btn-modifier {
-    background-color: #E9E013;
-}
-.btn-modifier:hover {
-    background-color: #d7ce17;
-}
-.btn-modifier:focus {
-    background-color: #ccc317;
-}
-.btn-supprimer {
-    background-color: #e91313;
-}
-.btn-supprimer:hover {
-    background-color: #d21414;
-}
-.btn-supprimer:focus {
-    background-color: #b71414;
-}
 .infos-suplementaire__colonne {
     width: 50%;
     display: flex;
@@ -101,16 +85,36 @@ img {
     width: 100%;
     border-radius: 4px;
 }
-.pagination {
+
+
+
+.form-filtre {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.filtre-prix, .filtre-killometrage, .filtre-anneeMiseEnCirculation {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.filtre-prix__affichage, .filtre-killometrage__affichage, .filtre-anneeMiseEnCirculation__affichage {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 10px;
+    justify-content: start;
+    gap: 20px;
 }
-.page-non-courante {
-    color: #7c7c7c;
-    text-decoration: none;
+.def {
+    width: fit-content;
 }
+
+.affichage-vehicule {
+
+}
+
+
+
+
 
 @media screen and (min-width: 1000px) {
     h1, .btn-ajouter {
@@ -122,17 +126,18 @@ img {
     h3 {
         margin-top: 6px; margin-bottom: 6px;
     }
-
-    form {
-        height: fit-content;
-        display: grid;
-        grid-template:
-            "header header" auto
-            "main section" 500px / auto auto;
-        gap: 10px;
+    .affichage-vehicule {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    .vehicule {
+        width: 32vw;
+        border-radius: 15px;
+        box-shadow: 4px 4px 10px #656565;
     }
     main {
-        grid-area: main;
         max-width: 100%;
         width: fit-content;
         min-width: 400px;
@@ -143,7 +148,7 @@ img {
         flex-wrap: wrap;
         
     }
-    .car-affichage {
+    .vehicule-affichage {
         background-color: #F2EEEE;
         padding: 4px;
         max-width: 31vw;
@@ -151,7 +156,6 @@ img {
         border-radius: 5px;
     }
     section {
-        grid-area: section;
         width: fit-content;
     }
     .affichage-picture {
