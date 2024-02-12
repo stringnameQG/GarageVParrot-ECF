@@ -14,10 +14,10 @@
     <main>
         {% for car in cars %}
         <div class="car-affichage">
-            {% for image in car.picture %}
+            {% for image in car.name %}
                 <img class="picture" id="{{ asset('/cars_picture/' ~ image.name) }}" alt="{{ car.id }}">
             {% endfor %}
-            <img data-test class="img" id="{{ car.id }}" src="{{ asset('/cars_picture/' ~ car.picture[0].name) }}" alt="Image" decoding="async">
+            <img data-test class="img" id="{{ car.id }}" src="{{ asset('/cars_picture/' ~ car.picture[0].picturecarNAME) }}" alt="Image" decoding="async">
             <button href="{{ car.id }}" class="prev-button">Prev</button>
             <button href="{{ car.id }}" class="next-button">Next</button>
 

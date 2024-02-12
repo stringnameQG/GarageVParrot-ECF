@@ -1,7 +1,16 @@
-function vehiculeStyle(vehiculeList) { 
-    
+function supprimerAncienneRecherche() {
+    let elementSupprime = document.querySelectorAll(".vehicule");
+    elementSupprime.forEach(element => {
+        element.remove(); 
+    });
+}
+
+function vehiculeStyle(vehiculeList) {
+
+    supprimerAncienneRecherche();
+
     const vehiculeAffichage = document.querySelector(".affichage-vehicule");
-    const vehiculeImg = "vehicule";
+    const vehiculeImg = "vehicule-img";
     const vehicule = "vehicule";
     const vehiculeTitre = "vehicule-titre";
     const vehiculePrixKilometrage = "vehicule__prix-kilometrage";
@@ -11,8 +20,8 @@ function vehiculeStyle(vehiculeList) {
     const infosStyle = "infos-style";
     const infosAutre = "autres-infos";
     const infosAutreTitre = "autres-infos__titre";
-
-    vehiculeList.forEach(element => {
+    
+    for (const property in vehiculeList) {
         let divVehicule = document.createElement("div");
         let imgVehiculeImg = document.createElement("img");
         let spanVehiculeTitre = document.createElement("span");
@@ -77,69 +86,71 @@ function vehiculeStyle(vehiculeList) {
         pInfosSuplementaireColonneStyleInfosStylePuissanceDin.className = infosStyle;
         divInfosAutre.className = infosAutre;
         h3InfosAutre.className = infosAutreTitre;
-    
-        spanVehiculeTitre.textContent = element["name"];
-        pVehiculePrix.textContent = "".concat('Prix: ', element["price"]);
-        pVehiculeKilometrage.textContent = "".concat('Kilométrage: ', element["killometering"]);
-        pVehiculeMiseEnCirculation.textContent = "".concat('mise en circulation: ', element["circulation"]);
+        
+        imgVehiculeImg.src = "/cars_picture/".concat('', vehiculeList[property]["picturecar_name"][0]);
+        spanVehiculeTitre.textContent = vehiculeList[property]["name"];
+        pVehiculePrix.textContent = "".concat('Prix: ', vehiculeList[property]["price"]);
+        pVehiculeKilometrage.textContent = "".concat('Kilométrage: ', vehiculeList[property]["killometering"]);
+        pVehiculeMiseEnCirculation.textContent = "".concat('mise en circulation: ', vehiculeList[property]["circulation"]);
         h2InfosSuplementaire.textContent = "informations suplémentaire:";
         pInfosSuplementaireColonneStyleMarque.textContent = "Marque";
-        if(element["brand"] == null){
+        if(vehiculeList[property]["brand"] == null){
             pInfosSuplementaireColonneStyleInfosStyleMarque.textContent = "non renseigné";
         } else {
-            pInfosSuplementaireColonneStyleInfosStyleMarque.textContent = element["brand"];
+            pInfosSuplementaireColonneStyleInfosStyleMarque.textContent = vehiculeList[property]["brand"];
         }
         pInfosSuplementaireColonneStyleCarburant.textContent = "Carburant";
-        if(element["fuel"] == null){
+        if(vehiculeList[property]["fuel"] == null){
             pInfosSuplementaireColonneStyleInfosStyleCarburant.textContent = "non renseigné";
         } else {
-            pInfosSuplementaireColonneStyleInfosStyleCarburant.textContent = element["fuel"];
+            pInfosSuplementaireColonneStyleInfosStyleCarburant.textContent = vehiculeList[property]["fuel"];
         }
         pInfosSuplementaireColonneStyleCouleur.textContent = "Couleur";
-        if(element["color"] == null){
+        if(vehiculeList[property]["color"] == null){
             pInfosSuplementaireColonneStyleInfosStyleCouleur.textContent = "non renseigné";
         } else {
-            pInfosSuplementaireColonneStyleInfosStyleCouleur.textContent = element["color"];
+            pInfosSuplementaireColonneStyleInfosStyleCouleur.textContent = vehiculeList[property]["color"];
         }
         pInfosSuplementaireColonneStylePuissanceFiscale.textContent = "Puissance fiscale";
-        if(element["fiscalpower"] == null){
+        if(vehiculeList[property]["fiscalpower"] == null){
             pInfosSuplementaireColonneStyleInfosStylePuissanceFiscale.textContent = "non renseigné";
         } else {
-            pInfosSuplementaireColonneStyleInfosStylePuissanceFiscale.textContent = element["fiscalpower"];
+            pInfosSuplementaireColonneStyleInfosStylePuissanceFiscale.textContent = vehiculeList[property]["fiscalpower"];
         }
         pInfosSuplementaireColonneStyleModele.textContent = "Modéle";
-        if(element["model"] == null){
+        if(vehiculeList[property]["model"] == null){
             pInfosSuplementaireColonneStyleInfosStyleModele.textContent = "non renseigné";
         } else {
-            pInfosSuplementaireColonneStyleInfosStyleModele.textContent = element["model"];
+            pInfosSuplementaireColonneStyleInfosStyleModele.textContent = vehiculeList[property]["model"];
         }
         pInfosSuplementaireColonneStyleBoiteDeVitesse.textContent = "Boite de vitresse";
-        if(element["gearbox"] == null){
+        if(vehiculeList[property]["gearbox"] == null){
             pInfosSuplementaireColonneStyleInfosStyleBoiteDeVitesse.textContent = "non renseigné";
         } else {
-            pInfosSuplementaireColonneStyleInfosStyleBoiteDeVitesse.textContent = element["gearbox"];
+            pInfosSuplementaireColonneStyleInfosStyleBoiteDeVitesse.textContent = vehiculeList[property]["gearbox"];
         }
         pInfosSuplementaireColonneStyleNombreDePorte.textContent = "Nombre de porte";
-        if(element["numberofdoors"] == null){
+        if(vehiculeList[property]["numberofdoors"] == null){
             pInfosSuplementaireColonneStyleInfosStyleNombreDePorte.textContent = "non renseigné";
         } else {
-            pInfosSuplementaireColonneStyleInfosStyleNombreDePorte.textContent = element["numberofdoors"];
+            pInfosSuplementaireColonneStyleInfosStyleNombreDePorte.textContent = vehiculeList[property]["numberofdoors"];
         }
         pInfosSuplementaireColonneStylePuissanceDin.textContent = "Puissance DIN";
-        if(element["powerdin"] == null){
+        if(vehiculeList[property]["powerdin"] == null){
             pInfosSuplementaireColonneStyleInfosStylePuissanceDin.textContent = "non renseigné";
         } else {
-            pInfosSuplementaireColonneStyleInfosStylePuissanceDin.textContent = element["powerdin"];
+            pInfosSuplementaireColonneStyleInfosStylePuissanceDin.textContent = vehiculeList[property]["powerdin"];
         }
         h3InfosAutre.textContent = "Autre infos";
-        if(element["otherinfo"] == null){
+        if(vehiculeList[property]["otherinfo"] == null){
             pInfosAutre.textContent = "non renseigné";
         } else {
-            pInfosAutre.textContent = element["otherinfo"];
+            pInfosAutre.textContent = vehiculeList[property]["otherinfo"];
         }
 
-    vehiculeAffichage.prepend(divVehicule);
-        divVehicule.prepend(spanVehiculeTitre);
+    vehiculeAffichage.prepend(divVehicule); imgVehiculeImg
+        divVehicule.prepend(imgVehiculeImg);
+        imgVehiculeImg.after(spanVehiculeTitre);
         spanVehiculeTitre.after(divVehiculePrixKilometrage);
             divVehiculePrixKilometrage.prepend(pVehiculePrix);
             pVehiculePrix.after(pVehiculeKilometrage);
@@ -175,9 +186,32 @@ function vehiculeStyle(vehiculeList) {
         divInfosSuplementaire.after(divInfosAutre);
             divInfosAutre.prepend(h3InfosAutre);
             h3InfosAutre.after(pInfosAutre);
-    });
+    };
 }
 
+function creationListVehicule(data){
+    var imgListAll = {};
+    var imgList = [];
+    var idRef = data[0]["car_id"];
+    data.forEach(element => {
+        let img = element["picturecar_name"];
+        if( element["car_id"] != idRef ){
+            imgListAll[idRef] = imgList;
+            imgList = [];
+        }
+        imgList.push(img);
+        idRef = element["car_id"];
+    }) 
+    imgListAll[idRef] = imgList; 
+
+    var vehiculeList = {};
+    for (const property in data) {
+        idRef = data[property]["car_id"];
+        vehiculeList[idRef] = data[property];
+        vehiculeList[idRef]["picturecar_name"] = imgListAll[idRef];
+    }
+    vehiculeStyle(vehiculeList);
+}
 
 function tableauForm() {
     const prixMinimum = document.querySelector("#prix-minimum").value;
@@ -207,8 +241,7 @@ function AppelSciptPhp() {
         dataType: "json",
         timeout: 1500,
         success: function(data) {
-            vehiculeStyle(data);
-            // console.log(data);
+            creationListVehicule(data)
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);

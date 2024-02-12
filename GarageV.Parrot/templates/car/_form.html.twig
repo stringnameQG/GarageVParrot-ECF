@@ -46,7 +46,7 @@
             <h3>Images</h3>
             {% for image in car.picture %}
                 <div class="picture">
-                    <img src="{{ asset('/cars_picture/' ~ image.name) }}"alt="Image" decoding="async" height="auto" width="150px">
+                    <img src="{{ asset('/cars_picture/' ~ image.picturecarNAME) }}"alt="Image" decoding="async" height="auto" width="150px">
                     <a class="btn-supprimer-image" href="{{ path('app_car_delete_image', {id: image.id}) }}" 
                     data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>
                 </div>

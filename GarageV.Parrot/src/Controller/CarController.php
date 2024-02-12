@@ -65,7 +65,7 @@ class CarController extends AbstractController
 
                 // On stocke l'image dans la base de données (son nom)
                 $img = new Picturecar();
-                $img->setName($fichier);
+                $img->setpicturecarNAME($fichier);
                 $car->addPicture($img);
             }
 
@@ -112,7 +112,7 @@ class CarController extends AbstractController
 
                 // On stocke l'image dans la base de données (son nom)
                 $img = new Picturecar();
-                $img->setName($fichier);
+                $img->setpicturecarNAME($fichier);
                 $car->addPicture($img);
             }
 
@@ -146,7 +146,7 @@ class CarController extends AbstractController
         //On vérifie si le token est valide
         if($this->isCsrfTokenValid('delete'.$picture->getId(), $data['_token'])){
             // Récupération du nom de l'image
-            $nom = $picture->getName();
+            $nom = $picture->getpicturecarNAME();
             // suppression du fichier
             unlink($this->getParameter('images_directory').'/'.$nom);
 

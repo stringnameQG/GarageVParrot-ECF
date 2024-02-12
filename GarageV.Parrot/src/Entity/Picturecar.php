@@ -15,7 +15,7 @@ class Picturecar
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $picturecarNAME = null;
 
     #[ORM\ManyToOne(inversedBy: 'picture')]
     #[ORM\JoinColumn(nullable: false)]
@@ -26,14 +26,14 @@ class Picturecar
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getPicturecarNAME(): ?string
     {
-        return $this->name;
+        return $this->picturecarNAME;
     }
 
-    public function setName(string $name): static
+    public function setPicturecarNAME(string $picturecarNAME): static
     {
-        $this->name = $name;
+        $this->picturecarNAME = $picturecarNAME;
 
         return $this;
     }
