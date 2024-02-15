@@ -14,12 +14,17 @@ function vehiculeStyle(vehiculeList) {
     const vehicule = "vehicule";
     const vehiculeTitre = "vehicule-titre";
     const vehiculePrixKilometrage = "vehicule__prix-kilometrage";
+    const vehiculePrix = "vehicule__prix";
+    const vehiculeKilometrage = "vehicule__Kilometrage";
     const infosSuplementaire = "infos-suplementaire";
     const infosSuplementaireColonne = "infos-suplementaire__colonne";
     const infosSuplementaireColonneStyle = "infos-suplementaire__colonne__style";
     const infosStyle = "infos-style";
     const infosAutre = "autres-infos";
     const infosAutreTitre = "autres-infos__titre";
+    const formulaireDeContacteDiv = "formulaire-vehicule";
+    const formulaireDeContactePhrase = "";
+    const formulaireDeContacte = "formulaire-btn-vehicule";
     
     for (const property in vehiculeList) {
         let divVehicule = document.createElement("div");
@@ -60,11 +65,16 @@ function vehiculeStyle(vehiculeList) {
         let divInfosAutre = document.createElement("div");
         let h3InfosAutre = document.createElement("h3");
         let pInfosAutre = document.createElement("p");
+        let divformulaireDeContactePhrase = document.createElement("div");
+        let pformulaireDeContactePhrase = document.createElement("p");
+        let spanFormulairecontacte = document.createElement("span");
 
         divVehicule.className = vehicule;
         imgVehiculeImg.className = vehiculeImg;
         spanVehiculeTitre.className = vehiculeTitre;
         divVehiculePrixKilometrage.className = vehiculePrixKilometrage;
+        pVehiculePrix.className = vehiculePrix;
+        pVehiculeKilometrage.className = vehiculeKilometrage;
         divInfosSuplementaire.className = infosSuplementaire;
         divInfosSuplementaireColonne1.className = infosSuplementaireColonne;
         divInfosSuplementaireColonneStyleMarque.className = infosSuplementaireColonneStyle;
@@ -86,6 +96,9 @@ function vehiculeStyle(vehiculeList) {
         pInfosSuplementaireColonneStyleInfosStylePuissanceDin.className = infosStyle;
         divInfosAutre.className = infosAutre;
         h3InfosAutre.className = infosAutreTitre;
+        divformulaireDeContactePhrase.className = formulaireDeContacteDiv;
+        pformulaireDeContactePhrase.className = formulaireDeContactePhrase;
+        spanFormulairecontacte.className = formulaireDeContacte;
         
         imgVehiculeImg.src = "/cars_picture/".concat('', vehiculeList[property]["picturecar_name"][0]);
         spanVehiculeTitre.textContent = vehiculeList[property]["name"];
@@ -147,6 +160,8 @@ function vehiculeStyle(vehiculeList) {
         } else {
             pInfosAutre.textContent = vehiculeList[property]["otherinfo"];
         }
+        pformulaireDeContactePhrase.textContent = "des questions sur ce vehicule ?";
+        spanFormulairecontacte.textContent = "formulaire";
 
     vehiculeAffichage.prepend(divVehicule); imgVehiculeImg
         divVehicule.prepend(imgVehiculeImg);
@@ -183,10 +198,14 @@ function vehiculeStyle(vehiculeList) {
                 divInfosSuplementaireColonneStyleNombreDePorte.after(divInfosSuplementaireColonneStylePuissanceDin);
                     divInfosSuplementaireColonneStylePuissanceDin.prepend(pInfosSuplementaireColonneStylePuissanceDin);
                     pInfosSuplementaireColonneStylePuissanceDin.after(pInfosSuplementaireColonneStyleInfosStylePuissanceDin);
-        divInfosSuplementaire.after(divInfosAutre);
-            divInfosAutre.prepend(h3InfosAutre);
-            h3InfosAutre.after(pInfosAutre);
+            divInfosSuplementaire.after(divInfosAutre);
+                divInfosAutre.prepend(h3InfosAutre);
+                h3InfosAutre.after(pInfosAutre);
+            divInfosAutre.after(divformulaireDeContactePhrase);
+                divformulaireDeContactePhrase.prepend(pformulaireDeContactePhrase);
+                pformulaireDeContactePhrase.after(spanFormulairecontacte);
     };
+    formulaireContacteAffichageVehicule();
 }
 
 function creationListVehicule(data){
@@ -235,13 +254,13 @@ function tableauForm() {
 function AppelSciptPhp() {
     let form = tableauForm();
     $.ajax({
-        url: 'php/vehicule/filtreVehicule.php',
+        url: '/php/vehicule/filtreVehicule.php', // 'php/vehicule/filtreVehicule.php'
         method: "GET",
         data: form,
         dataType: "json",
         timeout: 1500,
         success: function(data) {
-            creationListVehicule(data)
+            creationListVehicule(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);

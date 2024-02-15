@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/car/CarIndex.css') }}">
 {% endblock %}
 
-{% block title %}Car index{% endblock %}
+{% block title %}Car{% endblock %}
 
 {% block body %}
     <header>
@@ -14,8 +14,8 @@
     <main>
         {% for car in cars %}
         <div class="car-affichage">
-            {% for image in car.name %}
-                <img class="picture" id="{{ asset('/cars_picture/' ~ image.name) }}" alt="{{ car.id }}">
+            {% for image in car.picture %} 
+                <img class="picture" id="{{ asset('/cars_picture/' ~ image.picturecarNAME) }}" alt="{{ car.id }}">
             {% endfor %}
             <img data-test class="img" id="{{ car.id }}" src="{{ asset('/cars_picture/' ~ car.picture[0].picturecarNAME) }}" alt="Image" decoding="async">
             <button href="{{ car.id }}" class="prev-button">Prev</button>
@@ -133,7 +133,7 @@
     </section>
     {% endif %}
 
-    <div class='pagination'>
+    <footer class='pagination'>
         {% for page in 1..totalPages %}
             {% if page == currentPage %}
                 <span>{{ page }}</span>
@@ -141,7 +141,7 @@
                 <a class="page-non-courante" href="{{ path('app_car_index', {'page': page}) }}">{{ page }}</a>
             {% endif %}
         {% endfor %}
-    </div>
+    </footer>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('js/images.js') }}"></script>

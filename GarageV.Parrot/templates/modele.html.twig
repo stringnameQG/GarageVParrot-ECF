@@ -10,6 +10,7 @@
         {% block scripts %}
         {% endblock %}
         <script src="{{ asset('js/modele/navAffichage.js') }}"></script>
+        <script src="{{ asset('js/modele/formulaireContacteAffichage.js') }}"></script>
     </head>
     {# On détecte le changement de largeur de l'écran pour modifier l'affichage de la nav barre #}
     <body onresize="resizeWindowWidth()">
@@ -36,12 +37,14 @@
             {% block main %}{% endblock %}
         </main>
         {% block body %}{% endblock %}
-        {% block aside %}{% endblock %}
+        <aside>
+            {{ include('contactform/_form.html.twig') }}
+        </aside>
         <footer>
             <div class="nous-joindre">
                 <h3>NOUS JOINDRE</h3>
                 <p class="horaire-ouverture__jour">Téléphone: 07 45 23 15 49</p>
-                <p class="horaire-ouverture__jour">Ou via le formulaire</p>
+                <p class="horaire-ouverture__jour">Ou via le <span class="formulaire-btn">formulaire</span></p>
             </div>
             <div class="nos-horaires">
                 <h3>Nos horaires</h3>

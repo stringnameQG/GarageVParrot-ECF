@@ -11,16 +11,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\Common\Collections\Criteria;
 
 #[IsGranted('ROLE_ADMIN')]
 #[Route('/serve')]
 class ServeController extends AbstractController
 {
-    #[Route('/', name: 'app_serve_index', methods: ['GET'])]
-    public function index(ServeRepository $serveRepository): Response
-    {
+    #[Route('/{page<\d+>?1}', name: 'app_serve_index', methods: ['GET'])]
+    public function index(ServeRepository $serveRepository, int $page): Response
+    {   // On défini le nombre de voiture par page dans une variable
+        $servePerPage = 9;
+        // On crée ensuite une variable qui contien les paramétres de notre méthode critéria
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $servePerPage)  // Défine la premiére voiture affiché
+            ->setMaxResults($servePerPage);  // Définie le nombre de voiture affiché
+
+        $serves = $serveRepository->matching($criteria);
+
+        $totalViews = count($serveRepository->matching(Criteria::create()));
+
+        $totalPages = ceil($totalViews / $servePerPage);
+
         return $this->render('serve/index.html.twig', [
-            'serves' => $serveRepository->findAll(),
+            'serves' => $serves,
+            'currentPage' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 

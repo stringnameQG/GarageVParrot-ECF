@@ -11,16 +11,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\Common\Collections\Criteria;
 
 #[IsGranted('ROLE_USER')]
 #[Route('/contactform')]
 class ContactformController extends AbstractController
 {
-    #[Route('/', name: 'app_contactform_index', methods: ['GET'])]
-    public function index(ContactformRepository $contactformRepository): Response
-    {
+    #[Route('/{page<\d+>?1}', name: 'app_contactform_index', methods: ['GET'])]
+    public function index(ContactformRepository $contactformRepository, int $page): Response
+    {   // On défini le nombre de voiture par page dans une variable
+        $contactFormPerPage = 9;
+        // On crée ensuite une variable qui contien les paramétres de notre méthode critéria
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $contactFormPerPage)  // Défine la premiére voiture affiché
+            ->setMaxResults($contactFormPerPage);  // Définie le nombre de voiture affiché
+
+        $contactForms = $contactformRepository->matching($criteria);
+
+        $totalcontactForms = count($contactformRepository->matching(Criteria::create()));
+
+        $totalPages = ceil($totalcontactForms / $contactFormPerPage);
+
         return $this->render('contactform/index.html.twig', [
-            'contactforms' => $contactformRepository->findAll(),
+            'contactforms' => $contactForms,
+            'currentPage' => $page,
+            'totalPages' => $totalPages
         ]);
     }
 

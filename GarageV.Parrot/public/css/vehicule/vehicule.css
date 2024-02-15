@@ -2,20 +2,29 @@
     font-family: LiberationSans-Regular; 
     src: url('../../Police/LiberationSans-Regular.ttf');
 }
+main {
+    max-width: 100%;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
 .picture {
-    display: none;
+    display: flex;
 }
 h1 {
     margin: 2px;
     font-size: 20px;
 }
 .affichage-vehicule {
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: start;
 }
 .vehicule {
-    margin-bottom: 10px;
     padding: 6px;
     max-width: 90vw;
     width: 90vw;
@@ -25,6 +34,7 @@ h1 {
 }
 .vehicule-img {
     width: 100%;
+    border-radius: 8px;
 }
 .vehicule-titre {
     padding: 4px;
@@ -40,11 +50,9 @@ h1 {
 p {
     margin: 2px;
 }
-.vehicule>h2 {
-    display: none;
-}
 h2 {
     margin-top: 4px; margin-bottom: 0px;
+    display: flex;
     align-self: center;
     justify-content: center;
     align-items: center;
@@ -52,7 +60,7 @@ h2 {
 }
 .infos-suplementaire {
     margin-top: 0px;
-    display: none;
+    display: flex;
     flex-direction: row;
     justify-content: start;
 }
@@ -71,24 +79,41 @@ h2 {
     justify-content: start;
 }
 .autres-infos {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-.autres-infos > div {
-    align-items: center;
+.autres-infos > p, .autres-infos__titre {
+    align-self: center;
+}
+.autres-infos__titre {
+    font-family: LiberationSans-Regular;
 }
 .btn-car {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-img {
-    width: 100%;
-    border-radius: 4px;
+.formulaire-vehicule {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6px;
+}
+.formulaire-btn-vehicule {
+    color: #7C0000;
+    justify-self: center;
+    text-align: center;
+    align-self: center;
+}
+.formulaire-btn-vehicule:hover {
+    color: #d60606;
 }
 .form-filtre {
+    margin: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    align-items: center;
 }
 .filtre-prix, .filtre-killometrage, .filtre-anneeMiseEnCirculation {
     display: flex;
@@ -101,20 +126,27 @@ img {
     justify-content: start;
     gap: 20px;
 }
+.serialisation {
+    margin: 4px;
+    align-self: center;
+}
 .def {
     width: fit-content;
 }
 
-.affichage-vehicule {
-
-}
-
 @media screen and (min-width: 1000px) {
-    h1, .btn-ajouter {
-        font-size: 24px;
+    main {
+        width: 100%;
+        min-width: 400px;
+        height: min-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
     .affichage-vehicule {
-        margin-left: 0.5vw; margin-bottom: 0.5vw;
+        padding-left: 0.5vw; padding-bottom: 0.5vw;
+        width: calc(100% - 1vw);
+        height: min-content;
         display: flex;
         flex-direction: row;
         justify-content: start;
@@ -122,27 +154,14 @@ img {
         gap: 0.5vw;
     }
     .vehicule {
-        max-width: 32vw;
-        width: 31vw;
+        max-width: 100%;
+        width: 30.5vw;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         border-radius: 15px;
         box-shadow: 4px 4px 10px #656565;
-    }
-    main {
-        max-width: 100%;
-        width: fit-content;
-        min-width: 400px;
-        height: fit-content;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    .vehicule-affichage {
-        background-color: #F2EEEE;
-        padding: 4px;
-        max-width: 31vw;
-        width: 31vw;
-        border-radius: 5px;
     }
     section {
         width: fit-content;

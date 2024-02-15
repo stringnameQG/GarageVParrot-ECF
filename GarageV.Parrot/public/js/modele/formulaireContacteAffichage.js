@@ -1,11 +1,11 @@
-// On attende le chargement complét de la page 
-ajouterAvis = () => {
-    // On crée une variable liée a l'élément #AjouterCommentaires
-    let btn = document.querySelector("#AjouterCommentaires");
-    // On crée une variable liée à l'élément formulaire-avis
-    let formulaireAvis = document.querySelector(".formulaire-avis");
+
+formulaireContacteAffichage = () => {
+    // On crée une variable liée a l'élément .formulaire-btn
+    let btn = document.querySelector(".formulaire-btn");
+    // On crée une variable liée à l'élément .formulaire-contacte__content
+    let formulaireContacte = document.querySelector(".formulaire-contacte");
     // On crée une variable liée à l'élément formulaire-avis__close-icon
-    let formulaireAvisClose = document.querySelector(".formulaire-avis__close-icon");
+    let formulaireContacteClose = document.querySelector(".formulaire-contacte__close-icon");
     // On crée une variable liée à l'élément header
     let header = document.querySelector("header");
     // On crée une variable liée à l'élément main
@@ -17,7 +17,7 @@ ajouterAvis = () => {
     // On détecte le clique sur l'icon nav
     btn.addEventListener('click', () => {
         // On met le display de l'élément nav en flex pour l'afficher
-        formulaireAvis.style.display = "flex";
+        formulaireContacte.style.display = "flex";
         // On ajoute pour les élément header main nav la class avis-floux qui créra l'effet de floux
         header.className = 'floux';
         main.className = 'floux';
@@ -26,9 +26,9 @@ ajouterAvis = () => {
         body.style.overflow = 'hidden';
     })
     // On détecte le clique sur l'icon close
-    formulaireAvisClose.addEventListener('click', () => {
+    formulaireContacteClose.addEventListener('click', () => {
         // On met le display de l'élément nav en none pour le cacher
-        formulaireAvis.style.display = "none";
+        formulaireContacte.style.display = "none";
         // On retire pour les élément header main nav la class avis-floux qui créra l'effet de floux
         header.className = '';
         main.className = '';

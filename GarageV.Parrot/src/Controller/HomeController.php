@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Contactform;
 use App\Entity\View;
+use App\Form\ContactformType;
 use App\Form\ViewType;
 use App\Repository\ServeRepository;
 use App\Repository\ScheduleRepository;
@@ -13,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-  #[Route('/', name: 'app_accueil', methods: ['GET', 'POST'])]
+  #[Route('', name: 'app_accueil', methods: ['GET', 'POST'])]
   public function Accueil(
   ServeRepository $serveRepository,
   Request $request, 
@@ -32,10 +34,22 @@ class HomeController extends AbstractController
       return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
     }
 
+    $Contacte = new Contactform();
+    $formulaireContacte = $this->createForm(ContactformType::class, $Contacte);
+    $formulaireContacte->handleRequest($request);
+
+    if ($formulaireContacte->isSubmitted() && $formulaireContacte->isValid()) {
+      $entityManager->persist($Contacte);
+      $entityManager->flush();
+
+      return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+    }
+
     return $this->render('accueil/Accueil.html.twig', [
       'serves' => $serveRepository->findAll(),
       'view' => $view,
       'formulaireAvis' => $formulaireAvis->createView(), // Ajout formulaire avis
+      'form' => $formulaireContacte->createView(), // Ajout formulaire de contacte
       'schedules' => $scheduleRepository->findAll(),
     ]);
   }

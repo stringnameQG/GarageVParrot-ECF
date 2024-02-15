@@ -1,43 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}View index{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/view/view.css') }}">
+{% endblock %}
+
+{% block title %}Avis{% endblock %}
 
 {% block body %}
-    <h1>View index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>FirstName</th>
-                <th>Comment</th>
-                <th>Score</th>
-                <th>Validée</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <header>
+        <h1>Avis</h1>
+        <a class="ajouter" href="{{ path('app_view_new') }}">Ajouter</a>
+    </header>
+    <main>
         {% for view in views %}
-            <tr>
-                <td>{{ view.id }}</td>
-                <td>{{ view.name }}</td>
-                <td>{{ view.firstName }}</td>
-                <td>{{ view.comment }}</td>
-                <td>{{ view.score }}</td>
-                <td>{{ view.active }}</td>
-                <td>
-                    <a href="{{ path('app_view_show', {'id': view.id}) }}">show</a>
-                    <a href="{{ path('app_view_edit', {'id': view.id}) }}">edit</a>
-                </td>
-            </tr>
+            <div class="avis-affichage">
+                <div class="avis-affichage__name">
+                    <p class="avis-affichage__name-description">Nom</p>
+                    <p>{{ view.name }}</p>
+                </div>
+                <div class="avis-affichage__firstName">
+                    <p class="avis-affichage__firstName-description">Prénom</p>
+                    <p>{{ view.firstName }}</p>
+                </div>
+                <div class="avis-affichage__score">
+                    <p class="avis-affichage__score-description">Note</p>
+                    <p>{{ view.score }}/5</p>
+                </div>
+                <div class="avis-affichage__comment">
+                    <p>Commentaire</p>
+                    <p>{{ view.comment }}</p>
+                </div>
+                <div class="avis-affichage__btn">
+                    {% if view.active == 1 %}
+                    <p class="avis-affichage__btn__valider">Valider</p>
+                    {% else %}
+                    <p class="avis-affichage__btn__non-valider">Valider</p>
+                    {% endif  %}
+                    {{ include('view/_delete_form.html.twig') }}
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
+            <div>
+                <h2>Aucun avis</h2>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_view_new') }}">Create new</a>
+    </main>
+    <footer class='pagination'>
+        {% for page in 1..totalPages %}
+            {% if page == currentPage %}
+                <span>{{ page }}</span>
+            {% else %}
+                <a class="page-non-courante" href="{{ path('app_view_index', {'page': page}) }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+    </footer>
 {% endblock %}

@@ -52,7 +52,6 @@ main {
     background-color: #F2EEEE;
     padding: 4px;
     max-width: 500px;
-    height: fit-content;
     border-radius: 5px;
     box-shadow: 1px 1px 8px #4d4d4d;
 }
@@ -82,10 +81,10 @@ h2 {
     color: #666666;
 }
 .btn-modifier, .btn-supprimer {
+    height: fit-content;
     color: #000000;
     padding: 3px;
     width: fit-content;
-    align-self: center;
     text-decoration: none;
     border-radius: 5px;
     border: 0px;
@@ -207,5 +206,14 @@ img {
         display: flex;
         flex-direction: column;
         justify-content: start;
+    }
+    .btn-car {
+        height: 26px;
+    }
+    .btn-modifier, .btn-supprimer {
+        font-size: 20px;
+    }
+    form {
+        height: 4px;
     }
 }
