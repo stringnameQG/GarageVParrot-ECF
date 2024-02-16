@@ -10,6 +10,7 @@ function vehiculeStyle(vehiculeList) {
     supprimerAncienneRecherche();
 
     const vehiculeAffichage = document.querySelector(".affichage-vehicule");
+    const vehiculeContentImg = "vehicule-content-img";
     const vehiculeImg = "vehicule-img";
     const vehicule = "vehicule";
     const vehiculeTitre = "vehicule-titre";
@@ -29,6 +30,7 @@ function vehiculeStyle(vehiculeList) {
     for (const property in vehiculeList) {
         let divVehicule = document.createElement("div");
         let imgVehiculeImg = document.createElement("img");
+        let divVehiculeContentImg = document.createElement("div");
         let spanVehiculeTitre = document.createElement("span");
         let divVehiculePrixKilometrage = document.createElement("div");
         let pVehiculePrix = document.createElement("p");
@@ -70,6 +72,7 @@ function vehiculeStyle(vehiculeList) {
         let spanFormulairecontacte = document.createElement("span");
 
         divVehicule.className = vehicule;
+        divVehiculeContentImg.className = vehiculeContentImg;
         imgVehiculeImg.className = vehiculeImg;
         spanVehiculeTitre.className = vehiculeTitre;
         divVehiculePrixKilometrage.className = vehiculePrixKilometrage;
@@ -96,6 +99,7 @@ function vehiculeStyle(vehiculeList) {
         pInfosSuplementaireColonneStyleInfosStylePuissanceDin.className = infosStyle;
         divInfosAutre.className = infosAutre;
         h3InfosAutre.className = infosAutreTitre;
+        pInfosAutre.className = infosStyle;
         divformulaireDeContactePhrase.className = formulaireDeContacteDiv;
         pformulaireDeContactePhrase.className = formulaireDeContactePhrase;
         spanFormulairecontacte.className = formulaireDeContacte;
@@ -163,9 +167,10 @@ function vehiculeStyle(vehiculeList) {
         pformulaireDeContactePhrase.textContent = "des questions sur ce vehicule ?";
         spanFormulairecontacte.textContent = "formulaire";
 
-    vehiculeAffichage.prepend(divVehicule); imgVehiculeImg
-        divVehicule.prepend(imgVehiculeImg);
-        imgVehiculeImg.after(spanVehiculeTitre);
+    vehiculeAffichage.prepend(divVehicule); 
+        divVehicule.prepend(divVehiculeContentImg);
+            divVehiculeContentImg.prepend(imgVehiculeImg);
+        divVehiculeContentImg.after(spanVehiculeTitre);
         spanVehiculeTitre.after(divVehiculePrixKilometrage);
             divVehiculePrixKilometrage.prepend(pVehiculePrix);
             pVehiculePrix.after(pVehiculeKilometrage);

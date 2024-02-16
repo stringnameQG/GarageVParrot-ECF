@@ -17,7 +17,9 @@
             {% for image in car.picture %} 
                 <img class="picture" id="{{ asset('/cars_picture/' ~ image.picturecarNAME) }}" alt="{{ car.id }}">
             {% endfor %}
-            <img data-test class="img" id="{{ car.id }}" src="{{ asset('/cars_picture/' ~ car.picture[0].picturecarNAME) }}" alt="Image" decoding="async">
+            <div class="img-contenant">
+                <img data-test class="img" id="{{ car.id }}" src="{{ asset('/cars_picture/' ~ car.picture[0].picturecarNAME) }}" alt="Image" decoding="async">
+            </div>
             <button href="{{ car.id }}" class="prev-button">Prev</button>
             <button href="{{ car.id }}" class="next-button">Next</button>
 

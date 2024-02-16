@@ -6,6 +6,7 @@ use App\Entity\Car;
 use App\Entity\Picturecar;
 use App\Form\CarType;
 use App\Repository\CarRepository;
+use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +43,11 @@ class CarController extends AbstractController
     }
 
     #[Route('/new', name: 'app_car_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager,
+        PictureService $pictureService
+    ): Response
     {
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
@@ -54,14 +59,8 @@ class CarController extends AbstractController
 
             // On boucle sur les images 
             foreach($pictures as $picture) {
-                // On génère un nouveau fichier 
-                $fichier = md5(uniqid()) . '.' . $picture->guessExtension();
 
-                // On copie le fichier dans le dosser uploads
-                $picture->move(
-                    $this->getParameter('images_directory'),
-                    $fichier
-                );
+                $fichier = $pictureService->add($picture);
 
                 // On stocke l'image dans la base de données (son nom)
                 $img = new Picturecar();
@@ -90,7 +89,12 @@ class CarController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_car_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Car $car, EntityManagerInterface $entityManager): Response
+    public function edit(
+        Request $request, 
+        Car $car, 
+        EntityManagerInterface $entityManager,
+        PictureService $pictureService
+    ): Response
     {
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
@@ -101,14 +105,8 @@ class CarController extends AbstractController
 
             // On boucle sur les images 
             foreach($pictures as $picture) {
-                // On génère un nouveau fichier 
-                $fichier = md5(uniqid()) . '.' . $picture->guessExtension();
-
-                // On copie le fichier dans le dosser uploads
-                $picture->move(
-                    $this->getParameter('images_directory'),
-                    $fichier
-                );
+                
+                $fichier = $pictureService->add($picture);
 
                 // On stocke l'image dans la base de données (son nom)
                 $img = new Picturecar();
